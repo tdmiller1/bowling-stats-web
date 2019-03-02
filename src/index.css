@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  padding-top: 1em;
+  justify-content: center;
+  align-items: center;
+  margin:0 auto;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.login-center{
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding:10px 20px;
+  border-radius:5px;
+  background-color:#039be5;
+}
