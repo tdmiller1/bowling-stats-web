@@ -8,7 +8,7 @@ export default class Auth {
     clientID: 'Otg8g3tLLbeDgj8KsXhyyuzQgYR006Bq',
     redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/callback' : 'https://bowling-stats-web.herokuapp.com/callback',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile email'
   });
 
   login = () => {
@@ -32,6 +32,16 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+      if(profile){
+        localStorage.setItem('profile', JSON.stringify(profile))
+        if(profile.email){
+          localStorage.setItem('email', JSON.stringify(profile.email))
+          const url = `http://localhost:3001/users/add?id=${profile.email}&name=${profile.name}`;
+          fetch(url)
+        }
+      }
+    })
     history.replace('/home');
   }
 
@@ -39,6 +49,8 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('email');
     history.replace('/home');
   }
 

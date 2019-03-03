@@ -5,10 +5,12 @@ class Game extends Component {
   render() {
     
     return (
-      <div>
-        Game
-      </div>
-      );
+      <tr>
+        <td>{this.props._id}</td>
+        <td>{this.props.score}</td>
+        <td>{this.props.date}</td>
+      </tr>
+      )
     }
   }
 

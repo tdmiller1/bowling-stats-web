@@ -17,11 +17,10 @@ class Login extends Component {
         {
           isAuthenticated() &&
           <div>
-            <div 
-                className="container column" 
-                style={{ cursor: 'pointer' }}
-                onClick={this.logout}>
-                    Log Out
+            <div className="header" >
+              <div className="auth-button"
+              style={{ cursor: 'pointer' }}
+              onClick={this.logout}>Log Out</div>
             </div>
             <App />
         </div>

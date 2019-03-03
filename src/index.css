@@ -27,3 +27,36 @@ body {
   border-radius:5px;
   background-color:#039be5;
 }
+
+.app-container{
+  flex-direction: row;
+  display:flex;
+  height: calc(100vh - 58px);
+}
+
+.app-sidepanel{
+  width:300px;
+  min-width: 200px;
+  background-color:#1c9954;
+  border-right:2px solid #d4d4d4;
+  padding:0px 20px;
+}
+
+.app-content{
+  padding:0px 20px;
+  width:100%;
+}
+
+.header{
+  background-color:#d4d4d4;
+  padding:10px 0px;
+  overflow:hidden;
+}
+
+.auth-button{
+  background-color:rgb(49, 138, 190);
+  padding:10px;
+  float:right;
+  width:65px;
+  margin-right:20px;
+}
