@@ -3,10 +3,11 @@ import auth0 from 'auth0-js';
 import history from './history';
 
 export default class Auth {
+
   auth0 = new auth0.WebAuth({
     domain: 'tuckermillerdev.auth0.com',
     clientID: 'Otg8g3tLLbeDgj8KsXhyyuzQgYR006Bq',
-    redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/callback' : 'https://bowling-stats-web.herokuapp.com/callback',
+    redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:4000/callback' : 'https://bowling-stats-web.herokuapp.com/callback',
     responseType: 'token id_token',
     scope: 'openid profile email'
   });
@@ -37,7 +38,13 @@ export default class Auth {
         localStorage.setItem('profile', JSON.stringify(profile))
         if(profile.email){
           localStorage.setItem('email', JSON.stringify(profile.email))
-          const url = `http://localhost:3001/users/add?id=${profile.email}&name=${profile.name}`;
+          var url = ""
+          if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+              var url = `http://localhost:3001/users/add?id=${profile.email}&name=${profile.name}`;
+          } else {
+              var url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
+          }
+
           fetch(url)
         }
       }
