@@ -44,7 +44,6 @@ export default class Auth {
           } else {
               var url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
           }
-
           fetch(url)
         }
       }

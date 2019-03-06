@@ -41,14 +41,16 @@ class App extends Component {
       } else {
         host = "https://bowling-stats-server.herokuapp.com"
       }
-      const url = `${host}/games/find?id=${email}`;
-      fetch(url).then(response => {
-        return response.json().then(body => {
-          if(response.status === 200){
-            this.setState({games: body.games})
-          }
+      if(email != ""){
+        const url = `${host}/games/find?id=${email}`;
+        fetch(url).then(response => {
+          return response.json().then(body => {
+            if(response.status === 200){
+              this.setState({games: body.games})
+            }
+          })
         })
-      })
+      }
   }
 
   renderGames = ({_id, score, date}) => 
