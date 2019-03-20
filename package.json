@@ -4,15 +4,33 @@
   "private": true,
   "dependencies": {
     "auth0-js": "^9.3.0",
+    "axios": "^0.18.0",
+    "moment": "^2.24.0",
+    "proptypes": "1.1.0",
     "react": "^15.6.1",
+    "react-datepicker": "2.2.0",
+    "react-day-picker": "^7.3.0",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2",
+<<<<<<< Updated upstream
     "react-scripts": "^2.1.5",
     "serve": "^10.1.2",
     "react-navigation": "^3.3.2"
+=======
+<<<<<<< HEAD
+    "react-scripts": "1.1.5",
+    "serve": "^10.1.2",
+    "webpack": "^3.11.0"
+=======
+    "react-scripts": "^2.1.5",
+    "serve": "^10.1.2",
+    "react-navigation": "^3.3.2"
+>>>>>>> 5c2a9f6b072f9dca09d6d70b7185ead6aa3d467a
+>>>>>>> Stashed changes
   },
   "devDependencies": {
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "predeploy": "npm run build",
