@@ -54,32 +54,8 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
   callback(){
     this.pullGames();
-=======
-  pullGames = _ => {
-      const email = this.checkEmail();
-      var host = ""
-      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        host = "http://localhost:3001"
-      } else {
-        host = "https://bowling-stats-server.herokuapp.com"
-      }
-      if(email != ""){
-        const url = `${host}/games/find?id=${email}`;
-        fetch(url).then(response => {
-          return response.json().then(body => {
-            if(response.status === 200){
-              this.setState({games: body.games})
-            }
-          })
-        })
-      }
-<<<<<<< Updated upstream
-=======
->>>>>>> 5c2a9f6b072f9dca09d6d70b7185ead6aa3d467a
->>>>>>> Stashed changes
   }
 
   renderGames = ({_id, score, date}) => 
@@ -88,7 +64,7 @@ class App extends Component {
       score={score}
       date={date}
       callback={this.callback.bind(this)} />
-
+    
     async addGame(){
       const addGameUrl = `${this.state.host}/games/add`;
       const response = await axios.post(addGameUrl,{
