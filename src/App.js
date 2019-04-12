@@ -88,7 +88,7 @@ class App extends Component {
       <div className="app-container">
         <div className="app-sidepanel">
           <div>
-            <input style={inputStyle} maxLength="3" min="0" max="300" value={this.state.gameScore} placeholder="Score" onChange={ (e) => {this.setState({gameScore : e.target.value}); }} />
+            <input style={inputStyle} value={this.state.gameScore} placeholder="Score" onChange={ (e) => {this.setState({gameScore : e.target.value}); }} />
             <div style={STYLE}>
               <DayPicker
                   required
