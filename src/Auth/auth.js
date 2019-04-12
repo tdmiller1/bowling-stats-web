@@ -40,9 +40,9 @@ export default class Auth {
           localStorage.setItem('email', JSON.stringify(profile.email))
           var url = ""
           if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-              var url = `http://localhost:3001/users/add?id=${profile.email}&name=${profile.name}`;
+              url = `http://localhost:3001/users/add?id=${profile.email}&name=${profile.name}`;
           } else {
-              var url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
+              url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
           }
           fetch(url)
         }

@@ -16,7 +16,8 @@ class App extends Component {
       gameScore:'',
       date:"",
       host:"",
-      selectedDay:""
+      selectedDay:"",
+      error:false
     };
   }
 
@@ -98,13 +99,19 @@ class App extends Component {
               </div>
 
             <button type="submit" onClick={() => {
-                if(this.state.selectedDay == ""){
-
+                if(this.state.selectedDay === ""){
+                  this.setState({error: "Enter Date Please"})
                 }else{
                   this.addGame();
                   this.setState({gameScore: ""})
+                  this.setState({error: false})
                 }
               }}>Add Game</button>
+              {
+              this.state.error && (
+                <h1>{this.state.error}</h1>
+              )
+            }
           </div>
         </div>
         <div>
