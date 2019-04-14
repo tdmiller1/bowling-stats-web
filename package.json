@@ -22,7 +22,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "dev": "set PORT=4000 && react-scripts start",
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
