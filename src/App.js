@@ -44,7 +44,7 @@ class App extends Component {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
       games:null,
-      email:"",
+      email:this.props.email,
       gameScore:'',
       date:"",
       host:"",
@@ -146,7 +146,7 @@ class App extends Component {
     async addGame(){
       const addGameUrl = `${this.state.host}/games/add`;
       const response = await axios.post(addGameUrl,{
-        id:this.state.email,
+        id:this.props.email,
         score:this.state.gameScore,
         date:this.state.selectedDay
       })
