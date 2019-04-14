@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 class Login extends Component {
 
   state = {
-    email:localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1)
+    email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null
   }
 
   login = () => {
