@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import '../index.css';
-
+import {
+  ListItemIcon} from '@material-ui/core'
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
+import DeleteIcon from "@material-ui/icons/Delete";
+
 class Game extends Component {
 
 
@@ -14,7 +17,7 @@ class Game extends Component {
   }
 
   parseDate(){
-    var date = moment(this.props.date).format('DD-MMM-YYYY');
+    var date = moment(this.props.date).format('MMMM DD, YYYY');
     return date
   }
 
@@ -39,16 +42,14 @@ class Game extends Component {
     }
   }
   render() {
-    
+    const cursor = {cursor:"pointer",margin:"10px"}
     return (
       <TableRow key={this.props._id}>
-        <TableCell component="th" scope="row">
-          <Button onClick={() => this.delete()}>
-              Delete
-          </Button>
-        </TableCell>
         <TableCell align="center">{this.props.score}</TableCell>
         <TableCell align="center">{this.parseDate()}</TableCell>
+        <ListItemIcon align="center" style={cursor} onClick={() => this.delete()}>
+            <DeleteIcon></DeleteIcon>
+          </ListItemIcon>
       </TableRow>
       )
     }

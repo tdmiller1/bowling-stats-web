@@ -35,6 +35,7 @@ class Login extends Component {
         {
           !isAuthenticated() && (
             <div className="container column">{' '}
+            <h1>Log in to start tracking your Bowling Games!</h1>
                 <div 
                     style={{ cursor: 'pointer', color:'white' }}
                     onClick={this.login} 

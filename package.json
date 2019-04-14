@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "moment": "^2.24.0",
     "primereact": "^3.1.2",
+    "chart.js": "^2.8.0",
     "proptypes": "1.1.0",
     "react": "16.8.6",
     "react-datepicker": "2.2.0",

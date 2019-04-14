@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
+import {Chart} from 'primereact/chart'
 import moment from 'moment';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -100,7 +101,7 @@ class App extends Component {
     var blabels = []
     var bdata = []
 
-    if(this.state.games != null){return}
+    if(this.state.games === null){return}
     else{
       this.state.games.sort(this.compare)
 
@@ -202,7 +203,7 @@ class App extends Component {
         <div className="app-content">
         { games != null ?
           <div className="app-chart"> 
-            {/* <Chart className="chart" type="line" data={this.state.data} /> */}
+            <Chart className="chart" type="line" data={this.state.data} />
           </div>
            : <div></div>}
           { games != null ? 
@@ -210,9 +211,9 @@ class App extends Component {
           <Table className={classes.table}>
               <TableHead>
                   <TableRow>
-                    <TableCell>Delete</TableCell>
                     <TableCell align="center">Score</TableCell>
                     <TableCell align="center">Date</TableCell>
+                    <TableCell align="center"></TableCell>
                   </TableRow>
               </TableHead>
               <TableBody>
