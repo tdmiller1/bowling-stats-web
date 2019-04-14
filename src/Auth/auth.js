@@ -20,7 +20,6 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        history.replace('/home');
       } else if (err) {
         history.replace('/home');
         console.log(err);
@@ -44,11 +43,18 @@ export default class Auth {
           } else {
               url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
           }
-          fetch(url)
+          console.log(localStorage.getItem('email'))
+          fetch(url).then(response => {
+            history.push({
+            pathname: '/home',
+            state: {
+              email: profile.email
+            }
+          })
+          })
         }
       }
     })
-    history.replace('/home');
   }
 
   logout = () => {

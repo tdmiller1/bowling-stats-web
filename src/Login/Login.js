@@ -4,6 +4,11 @@ import App from '../App';
 import Button from '@material-ui/core/Button'
 
 class Login extends Component {
+
+  state = {
+    email:localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1)
+  }
+
   login = () => {
     this.props.auth.login();
   }
@@ -23,7 +28,8 @@ class Login extends Component {
               <Button variant="outlined" className="auth-button"
               onClick={this.logout}>Log Out</Button>
             </div>
-            <App />
+            {console.log(this.props)}
+            <App email={this.state.email} />
         </div>
         }
         {

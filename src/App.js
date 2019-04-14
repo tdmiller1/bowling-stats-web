@@ -42,7 +42,7 @@ class App extends Component {
     super(props)
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
-      games:[],
+      games:null,
       email:"",
       gameScore:'',
       date:"",
@@ -64,26 +64,71 @@ class App extends Component {
     } else {
         this.setState({host: "https://bowling-stats-server.herokuapp.com"})
     }
-    this.setEmail();
   }
 
   componentDidMount(){
     this.pullGames();
+}
+
+  compare(a,b){
+    return moment.utc(a.date).diff(moment.utc(b.date))
   }
 
-  setEmail(){
-    const storageEmail = JSON.parse(localStorage.getItem("email"));
-    this.setState({email : storageEmail})
-    this.pullGames();
+  average(list){
+    var sum = 0
+    for(var i = 0; i < list.length; i++){
+      sum = sum + list[i].score
+    }
+
+    return(sum / list.length || 0)
+  }
+
+  movingAverage(list){
+
+    var averageList = []
+    for(var i = 0; i < list.length; i++){
+      averageList.push(this.average(list.slice(0,i)))
+    }
+    
+    return averageList;
+
+  }
+
+  prepareData(){
+    var alabels = []
+    var adata = []
+    var blabels = []
+    var bdata = []
+
+    if(this.state.games != null){return}
+    else{
+      this.state.games.sort(this.compare)
+
+      var averageList = this.movingAverage(this.state.games);
+
+      for(var i = 0; i < this.state.games.length; i++){
+        alabels.push(i)
+        adata.push(this.state.games[i].score)
+      }
+
+      for(var i = 0; i < averageList.length; i++){
+        blabels.push(i)
+        bdata.push(averageList[i])
+      }
+
+      this.setState({averages: averageList, data: {labels: alabels, datasets: [ 
+        {label: "Games", data: adata, fill: false, backgroundColor: "#42A5F5", borderColor: '#42A5F5'},
+        {label: "Average", data: bdata, fill: false, backgroundColor: "#66BB6A", borderColor: '#66BB6A'}
+      ]}})
+    }
   }
 
   async pullGames(){
-    const allGamesUrl = `${this.state.host}/games/find?id=${this.state.email}`;
-    const response = await axios.get(allGamesUrl)
-    if(response){
+    const allGamesUrl = `${this.state.host}/games/find?id=${this.props.email}`;
+    await axios.get(allGamesUrl).then(response => {
       this.setState({games: response.data.games})
-      console.log(response.data.games)
-    }
+      this.prepareData();
+    })
   }
 
   callback(){
@@ -155,7 +200,7 @@ class App extends Component {
         </div>
         
         <div className="app-content">
-        { games.length > 0 ?
+        { games != null ?
           <div className="app-chart"> 
             {/* <Chart className="chart" type="line" data={this.state.data} /> */}
           </div>
