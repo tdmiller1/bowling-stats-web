@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import App from '../App';
 
+import Button from '@material-ui/core/Button'
+
 class Login extends Component {
   login = () => {
     this.props.auth.login();
@@ -18,9 +20,8 @@ class Login extends Component {
           isAuthenticated() &&
           <div>
             <div className="header" >
-              <div className="auth-button"
-              style={{ cursor: 'pointer' }}
-              onClick={this.logout}>Log Out</div>
+              <Button variant="outlined" className="auth-button"
+              onClick={this.logout}>Log Out</Button>
             </div>
             <App />
         </div>

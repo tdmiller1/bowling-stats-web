@@ -53,11 +53,8 @@ body {
 }
 
 .auth-button{
-  background-color:rgb(49, 138, 190);
-  padding:10px;
   float:right;
-  width:65px;
-  margin-right:20px;
+  margin-right: 10px;
 }
 
 input, button{
@@ -70,3 +67,13 @@ table{
 }
 td{padding:5px;}
 tr:nth-child(even) {background: rgb(224, 224, 224)}
+
+.app-table{
+  overflow: scroll;
+  max-height:calc(90% - 350px)
+}
+
+.p-chart{
+  width:45vw;
+  padding:10px calc(25% - 70px);
+}

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import '../index.css';
+
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import TableCell from '@material-ui/core/TableCell';
 class Game extends Component {
 
 
@@ -37,14 +41,15 @@ class Game extends Component {
   render() {
     
     return (
-      <tr>
-        <td>
-          <button onClick={() => this.delete()}>
+      <TableRow key={this.props._id}>
+        <TableCell component="th" scope="row">
+          <Button onClick={() => this.delete()}>
               Delete
-          </button></td>
-        <td>{this.props.score}</td>
-        <td>{this.parseDate()}</td>
-      </tr>
+          </Button>
+        </TableCell>
+        <TableCell align="center">{this.props.score}</TableCell>
+        <TableCell align="center">{this.parseDate()}</TableCell>
+      </TableRow>
       )
     }
   }
