@@ -46,7 +46,7 @@ class App extends Component {
       games:null,
       sortedGames:null,
       email:this.props.email,
-      gameScore:-1,
+      gameScore:"",
       date:"",
       host:"",
       selectedDay:moment().toDate(),
@@ -174,7 +174,7 @@ class App extends Component {
         <div className="app-sidepanel">
           <form  onSubmit={(e) => {
             e.preventDefault();
-            if(this.state.selectedDay === "" || this.state.gameScore === -1){
+            if(this.state.selectedDay === "" || this.state.gameScore === ""){
               this.setState({error: "Enter Info Please"})
             }else{
               this.addGame();
