@@ -88,8 +88,9 @@ class App extends Component {
   movingAverage(list){
 
     var averageList = []
-    for(var i = 0; i < list.length; i++){
+    for(var i = 1; i < list.length+1; i++){
       averageList.push(this.average(list.slice(0,i)))
+
     }
     
     return averageList;
@@ -102,12 +103,13 @@ class App extends Component {
     var blabels = []
     var bdata = []
 
-    if(this.state.games === null){return}
+    if(this.state.games === null){
+      return
+    }
     else{
       this.state.games.sort(this.compare)
 
       var averageList = this.movingAverage(this.state.games);
-
       averageList[0] = this.state.games[0].score
 
       for(var i = 0; i < this.state.games.length; i++){

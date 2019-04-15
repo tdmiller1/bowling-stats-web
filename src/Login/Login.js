@@ -74,7 +74,6 @@ class Login extends Component {
                 </Toolbar>
               </AppBar>
             </div>
-            {console.log(this.props)}
             {
               this.state.profile ? (<Profile></Profile>) : <App email={this.state.email} />
             }

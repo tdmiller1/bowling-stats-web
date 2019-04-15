@@ -57,9 +57,11 @@ class Game extends Component {
             {this.parseDate()}
           </Typography>
         </TableCell>
-        <IconButton title="Delete" color="secondary" align="center" style={cursor} onClick={() => this.delete()}>
-            <DeleteIcon></DeleteIcon>
-        </IconButton>
+        <TableCell align="center">
+          <IconButton title="Delete" color="secondary" align="center" style={cursor} onClick={() => this.delete()}>
+              <DeleteIcon></DeleteIcon>
+          </IconButton>
+          </TableCell>
       </TableRow>
       )
     }

@@ -43,7 +43,6 @@ export default class Auth {
           } else {
               url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
           }
-          console.log(localStorage.getItem('email'))
           fetch(url).then(response => {
             history.push({
             pathname: '/home',
