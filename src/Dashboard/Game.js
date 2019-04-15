@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import '../index.css';
-import {
-  ListItemIcon} from '@material-ui/core'
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
 import DeleteIcon from "@material-ui/icons/Delete";
+import Typography from '@material-ui/core/Typography';
+import {
+  IconButton} from '@material-ui/core'
 
 class Game extends Component {
 
@@ -45,11 +46,19 @@ class Game extends Component {
     const cursor = {cursor:"pointer",margin:"10px"}
     return (
       <TableRow key={this.props._id}>
-        <TableCell align="center">{this.props.score}</TableCell>
-        <TableCell align="center">{this.parseDate()}</TableCell>
-        <ListItemIcon align="center" style={cursor} onClick={() => this.delete()}>
+        <TableCell align="center">
+          <Typography variant="h6" gutterBottom>
+            {this.props.score}
+          </Typography>
+        </TableCell>
+        <TableCell align="center">
+          <Typography variant="h6" gutterBottom>
+            {this.parseDate()}
+          </Typography>
+        </TableCell>
+        <IconButton title="Delete" color="secondary" align="center" style={cursor} onClick={() => this.delete()}>
             <DeleteIcon></DeleteIcon>
-          </ListItemIcon>
+        </IconButton>
       </TableRow>
       )
     }

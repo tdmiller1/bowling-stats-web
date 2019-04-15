@@ -1,12 +1,37 @@
 import React, { Component } from 'react';
 import App from '../App';
+import Profile from '../Profile';
 
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import {
+  ListItemIcon, ListItem} from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class Login extends Component {
 
   state = {
-    email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null
+    email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null,
+    profile: false
   }
 
   login = () => {
@@ -17,19 +42,41 @@ class Login extends Component {
     this.props.auth.logout();
   }
   
+  handleProfile = () => {
+    this.setState({profile: !this.state.profile})
+  }
+
   render() {
+    const {classes} = this.props
     const { isAuthenticated } = this.props.auth;
+    const cursor = {cursor:"pointer",margin:"10px"}
     return (
       <div>
         {
           isAuthenticated() &&
           <div>
             <div className="header" >
-              <Button variant="outlined" className="auth-button"
-              onClick={this.logout}>Log Out</Button>
+              <AppBar position='static'>
+              <Toolbar>
+                <Typography variant="h6" color="inherit" className={classes.grow}>
+                  Bowling Stats
+                </Typography>
+
+                <IconButton title="Profile" color="inherit" style={cursor} className="auth-button" onClick={this.handleProfile}>
+                  <AccountBoxIcon></AccountBoxIcon>
+                </IconButton>
+
+                <IconButton title="Logout" color="inherit" style={cursor} className="auth-button" onClick={this.logout} >
+                  <ExitToAppIcon></ExitToAppIcon>
+                </IconButton>
+                
+                </Toolbar>
+              </AppBar>
             </div>
             {console.log(this.props)}
-            <App email={this.state.email} />
+            {
+              this.state.profile ? (<Profile></Profile>) : <App email={this.state.email} />
+            }
         </div>
         }
         {
@@ -51,4 +98,4 @@ class Login extends Component {
     }
   }
 
-  export default Login;
+  export default withStyles(styles)(Login);

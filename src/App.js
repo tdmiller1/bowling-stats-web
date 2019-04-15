@@ -44,6 +44,7 @@ class App extends Component {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
       games:null,
+      sortedGames:null,
       email:this.props.email,
       gameScore:'',
       date:"",
@@ -106,6 +107,8 @@ class App extends Component {
       this.state.games.sort(this.compare)
 
       var averageList = this.movingAverage(this.state.games);
+
+      averageList[0] = this.state.games[0].score
 
       for(var i = 0; i < this.state.games.length; i++){
         alabels.push(i)

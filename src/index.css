@@ -31,7 +31,7 @@ body {
 .app-container{
   flex-direction: row;
   display:flex;
-  height: calc(100vh - 58px);
+  height: calc(100vh - 108px);
 }
 
 .app-sidepanel{
