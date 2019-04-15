@@ -139,10 +139,11 @@ class App extends Component {
     this.pullGames();
   }
 
-  renderGames = ({_id, score, date}) => 
+  renderGames = ({_id, score, date, playerId}) => 
     <Game key={_id}
       id={_id}
       score={score}
+      playerId={playerId}
       date={date}
       callback={this.callback.bind(this)} />
     

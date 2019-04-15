@@ -35,7 +35,8 @@ class Game extends Component {
     console.log(this.props)
     const response = await axios.delete(url,{
         data: {
-            id: this.props.id
+            id: this.props.id,
+            playerId: this.props.playerId
         }
     })
     if(response){

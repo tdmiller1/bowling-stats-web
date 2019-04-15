@@ -31,7 +31,8 @@ class Login extends Component {
 
   state = {
     email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null,
-    profile: false
+    profile: false,
+    width:window.innerWidth
   }
 
   login = () => {
@@ -53,7 +54,7 @@ class Login extends Component {
     return (
       <div>
         {
-          isAuthenticated() &&
+          isAuthenticated() && this.state.width > 700  &&
           <div>
             <div className="header" >
               <AppBar position='static'>
@@ -80,7 +81,7 @@ class Login extends Component {
         </div>
         }
         {
-          !isAuthenticated() && (
+          !isAuthenticated() && this.state.width > 700 && (
             <div className="container column">{' '}
             <h1>Log in to start tracking your Bowling Games!</h1>
                 <div 
@@ -93,6 +94,13 @@ class Login extends Component {
             </div>
           )
         }
+        
+        {this.state.width <= 700 && (
+          <div>
+            <h1>Please use larger browser</h1>
+            <p>Or download the app</p>
+          </div>
+        )}
       </div>
       );
     }
