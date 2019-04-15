@@ -4,10 +4,6 @@ import axios from 'axios'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
-
-import Button from '@material-ui/core/Button'
-
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -69,13 +65,13 @@ class Profile extends Component {
       <div style={container}>
        <Paper className={classes.root} elevation={1}>
         <Typography variant="h2" component="h3">
-          {this.state.user.playerName!="" && (this.state.user.playerName)}
+          {this.state.user.playerName !=="" && (this.state.user.playerName)}
         </Typography>
         <Typography variant="h4" component="h3">
-          {this.state.user.max != -1 && ("Max Game Score: " + this.state.user.max)}
+          {this.state.user.max !== -1 && ("Max Game Score: " + this.state.user.max)}
         </Typography>
         <Typography variant="h4" component="h3">
-          {this.state.user.average != -1 && ("Average Game Score: " + this.state.user.average)}
+          {this.state.user.average !== -1 && ("Average Game Score: " + this.state.user.average)}
         </Typography>
       </Paper>
       </div>

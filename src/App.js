@@ -46,7 +46,7 @@ class App extends Component {
       games:null,
       sortedGames:null,
       email:this.props.email,
-      gameScore:'',
+      gameScore:-1,
       date:"",
       host:"",
       selectedDay:moment().toDate(),
@@ -117,9 +117,9 @@ class App extends Component {
         adata.push(this.state.games[i].score)
       }
 
-      for(var i = 0; i < averageList.length; i++){
-        blabels.push(i)
-        bdata.push(averageList[i])
+      for(var j = 0; j < averageList.length; j++){
+        blabels.push(j)
+        bdata.push(averageList[j])
       }
 
       this.setState({averages: averageList, data: {labels: alabels, datasets: [ 
@@ -174,7 +174,7 @@ class App extends Component {
         <div className="app-sidepanel">
           <form  onSubmit={(e) => {
             e.preventDefault();
-            if(this.state.selectedDay === "" || this.state.gameScore === 0){
+            if(this.state.selectedDay === "" || this.state.gameScore === -1){
               this.setState({error: "Enter Info Please"})
             }else{
               this.addGame();
