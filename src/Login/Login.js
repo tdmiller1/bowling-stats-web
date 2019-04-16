@@ -9,6 +9,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import LandingPage from './LandingPage';
 
 const styles = {
   root: {
@@ -77,15 +78,8 @@ class Login extends Component {
         }
         {
           !isAuthenticated() && this.state.width > 700 && (
-            <div className="container column">{' '}
-            <h1>Log in to start tracking your Bowling Games!</h1>
-                <div 
-                    style={{ cursor: 'pointer', color:'white' }}
-                    onClick={this.login} 
-                    className="login-center">
-                        Log In
-                    {' '}
-                </div>
+            <div>
+              <LandingPage callback={this.login} />
             </div>
           )
         }
