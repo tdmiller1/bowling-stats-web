@@ -77,14 +77,14 @@ class Login extends Component {
         </div>
         }
         {
-          !isAuthenticated() && this.state.width > 700 && (
+          !isAuthenticated() && this.state.width > 200 && (
             <div>
               <LandingPage callback={this.login} />
             </div>
           )
         }
         
-        {this.state.width <= 700 && (
+        {this.state.width <= 200 && (
           <div>
             <h1>Please use larger browser</h1>
             <p>Or download the app</p>
