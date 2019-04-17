@@ -31,7 +31,7 @@ body {
 .app-container{
   flex-direction: row;
   display:flex;
-  height: calc(100vh - 108px);
+  height: calc(100vh - 68px);
 }
 
 .app-sidepanel{
@@ -48,7 +48,7 @@ body {
 
 .header{
   background-color:#d4d4d4;
-  padding:10px 0px;
+  padding:0px;
   overflow:hidden;
 }
 
@@ -67,11 +67,11 @@ table{
 }
 td{padding:5px;}
 tr:nth-child(even) {background: rgb(224, 224, 224)}
-
+/* 
 .app-table{
   overflow: scroll;
   max-height:calc(90% - 350px)
-}
+} */
 
 .p-chart{
   width:45vw;

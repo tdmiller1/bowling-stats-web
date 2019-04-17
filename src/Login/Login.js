@@ -6,10 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import LandingPage from './LandingPage';
+import { Hidden } from '@material-ui/core';
 
 const styles = {
   root: {
@@ -29,7 +31,8 @@ class Login extends Component {
   state = {
     email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null,
     profile: false,
-    width:window.innerWidth
+    width:window.innerWidth,
+    left:false
   }
 
   login = () => {
@@ -43,6 +46,12 @@ class Login extends Component {
   handleProfile = () => {
     this.setState({profile: !this.state.profile})
   }
+  
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
+  };
 
   render() {
     const {classes} = this.props
@@ -51,11 +60,16 @@ class Login extends Component {
     return (
       <div>
         {
-          isAuthenticated() && this.state.width > 700  &&
+          isAuthenticated() && this.state.width > 200  &&
           <div>
             <div className="header" >
               <AppBar position='static'>
               <Toolbar>
+                <Hidden only={["md","lg","xl"]}>
+                  <IconButton color='inherit' onClick={this.toggleDrawer('left', true)}>
+                    <AddCircleIcon></AddCircleIcon>
+                  </IconButton>
+                </Hidden>
                 <Typography variant="h6" color="inherit" className={classes.grow}>
                   Bowling Stats
                 </Typography>
@@ -72,7 +86,7 @@ class Login extends Component {
               </AppBar>
             </div>
             {
-              this.state.profile ? (<Profile></Profile>) : <App email={this.state.email} />
+              this.state.profile ? (<Profile></Profile>) : <App openDrawer={this.state.left} email={this.state.email} />
             }
         </div>
         }

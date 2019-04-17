@@ -8,6 +8,7 @@ import 'react-day-picker/lib/style.css';
 import {Chart} from 'primereact/chart'
 import moment from 'moment';
 import Table from '@material-ui/core/Table';
+import {Drawer, Hidden} from '@material-ui/core'
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -20,21 +21,68 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  chart: {
+    width:'45wv',
+    padding:'10px calc(25% - 70px)',
+    [theme.breakpoints.down('sm')]: {
+      width:'100%',
+      padding:0,
+    },
+  },
+  sidepanel: {
+
+  },
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
+  headerText:{
+    fontSize:15,
+    [theme.breakpoints.up('md')]: {
+      fontSize:20
+    }
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
+  content:{
+    padding:'0px',
+    width:'100%',
+    [theme.breakpoints.down('md')]: {
+      margin:0,
+      width:'calc(100%-10px)'
+    },
+  },
   dense: {
     marginTop: 16,
+  },
+  addGame: {
+    margin:10
   },
   menu: {
     width: 200,
   },
+  table: {
+    overflowY:'auto',
+    [theme.breakpoints.up('xs')]: {
+      overflowY:'auto',
+      height: 'calc(100% - 575px)',
+    },
+    [theme.breakpoints.down('md')]: {
+      overflowY:'auto',
+      height: 'calc(100% - 475px)',
+    },
+    [theme.breakpoints.down('xl')]: {
+      overflowY:'auto',
+      height: 'calc(100% - 460px)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      overflowY:'auto',
+      height: 'calc(100% - 275px)',
+    }
+  }
 });
 
 class App extends Component {
@@ -50,9 +98,17 @@ class App extends Component {
       date:"",
       host:"",
       selectedDay:moment().toDate(),
-      error:false
+      error:false,
+      width:window.innerWidth,
+      left:this.props.openDrawer
     };
   }
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
+  };
 
   handleDayClick(day, { selected }) {
     this.setState({
@@ -66,6 +122,13 @@ class App extends Component {
     } else {
         this.setState({host: "https://bowling-stats-server.herokuapp.com"})
     }
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    this.setState({left:nextProps.openDrawer})
+    console.log(nextProps)
   }
 
   componentDidMount(){
@@ -171,54 +234,95 @@ class App extends Component {
     const inputStyle = {backgroundColor: 'white',margin: '20px', minWidth:"250px"}
     return (
       <div className="app-container">
-        <div className="app-sidepanel">
-          <form  onSubmit={(e) => {
-            e.preventDefault();
-            if(this.state.selectedDay === "" || this.state.gameScore === ""){
-              this.setState({error: "Enter Info Please"})
-            }else{
-              this.addGame();
-              this.setState({gameScore: ""})
-              this.setState({error: false})
-            }
-          }}>
-          <TextField style={inputStyle} 
-            InputProps={{ inputProps: { min: 1, max: 300 } }}
-            type="number"
-            variant="outlined"
-            value={this.state.gameScore}
-            placeholder="Score"
-            onChange={ (e) => {this.setState({gameScore : parseInt(e.target.value,10) || 0}); }} />
-            <div style={STYLE}>
-              <DayPicker
-                  required
-                  selectedDays={this.state.selectedDay}
-                  onDayClick={this.handleDayClick}
-                />
-              </div>
+      
+      <Hidden only={["md","lg","xl"]}>
+        <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+          <div className={classes.sidepanel}>
+            <form  onSubmit={(e) => {
+              e.preventDefault();
+              if(this.state.selectedDay === "" || this.state.gameScore === ""){
+                this.setState({error: "Enter Info Please"})
+              }else{
+                this.addGame();
+                this.setState({gameScore: ""})
+                this.setState({error: false, left:false})
+              }
+            }}>
+            <TextField style={inputStyle} 
+              InputProps={{ inputProps: { min: 1, max: 300 } }}
+              type="number"
+              variant="outlined"
+              value={this.state.gameScore}
+              placeholder="Score"
+              onChange={ (e) => {this.setState({gameScore : parseInt(e.target.value,10) || 0}); }} />
+              <div style={STYLE}>
+                <DayPicker
+                    required
+                    selectedDays={this.state.selectedDay}
+                    onDayClick={this.handleDayClick}
+                  />
+                </div>
 
-              <Button variant="contained" color="primary" type="submit">Add Game</Button>
-              {
-              this.state.error && (
-                <h1>{this.state.error}</h1>
-              )
-            }
-          </form>
-        </div>
+                <Button className={classes.addGame} variant="contained" color="primary" type="submit">Add Game</Button>
+                {
+                this.state.error && (
+                  <h1>{this.state.error}</h1>
+                )
+              }
+            </form>
+          </div>
+        </Drawer>
+        </Hidden>
+        <Hidden only={["xs","sm"]} >
+        <div className="app-sidepanel">
+            <form  onSubmit={(e) => {
+              e.preventDefault();
+              if(this.state.selectedDay === "" || this.state.gameScore === ""){
+                this.setState({error: "Enter Info Please"})
+              }else{
+                this.addGame();
+                this.setState({gameScore: ""})
+                this.setState({error: false, left:false})
+              }
+            }}>
+            <TextField style={inputStyle} 
+              InputProps={{ inputProps: { min: 1, max: 300 } }}
+              type="number"
+              variant="outlined"
+              value={this.state.gameScore}
+              placeholder="Score"
+              onChange={ (e) => {this.setState({gameScore : parseInt(e.target.value,10) || 0}); }} />
+              <div style={STYLE}>
+                <DayPicker
+                    required
+                    selectedDays={this.state.selectedDay}
+                    onDayClick={this.handleDayClick}
+                  />
+                </div>
+
+                <Button variant="contained" color="primary" type="submit">Add Game</Button>
+                {
+                this.state.error && (
+                  <h1>{this.state.error}</h1>
+                )
+              }
+            </form>
+          </div>
+          </Hidden>
         
-        <div className="app-content">
+        <div className={classes.content}>
         { games != null ?
           <div className="app-chart"> 
-            <Chart className="chart" type="line" data={this.state.data} />
+            <Chart className={classes.chart} type="line" data={this.state.data} />
           </div>
            : <div></div>}
           { games != null ? 
-          <div className="app-table">
-          <Table className={classes.table}>
+          <div className={classes.table}>
+          <Table>
               <TableHead>
                   <TableRow>
-                    <TableCell align="center">Score</TableCell>
-                    <TableCell align="center">Date</TableCell>
+                    <TableCell className={classes.headerText} align="center">Score</TableCell>
+                    <TableCell className={classes.headerText} align="center">Date</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
               </TableHead>

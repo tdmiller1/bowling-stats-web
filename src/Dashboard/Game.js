@@ -2,12 +2,23 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import '../index.css';
+import { withStyles } from '@material-ui/core/styles';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from '@material-ui/core/Typography';
 import {
   IconButton} from '@material-ui/core'
+
+
+  const styles = theme => ({
+    cellText:{
+      fontSize:15,
+      [theme.breakpoints.up('md')]: {
+        fontSize:20
+    },
+    }
+  });
 
 class Game extends Component {
 
@@ -43,16 +54,17 @@ class Game extends Component {
     }
   }
   render() {
+    const {classes} = this.props
     const cursor = {cursor:"pointer",margin:"10px"}
     return (
       <TableRow key={this.props._id}>
         <TableCell align="center">
-          <Typography variant="h6" gutterBottom>
+          <Typography className={classes.cellText} variant="h6" gutterBottom>
             {this.props.score}
           </Typography>
         </TableCell>
         <TableCell align="center">
-          <Typography variant="h6" gutterBottom>
+          <Typography className={classes.cellText} variant="h6" gutterBottom>
             {this.parseDate()}
           </Typography>
         </TableCell>
@@ -66,4 +78,4 @@ class Game extends Component {
     }
   }
 
-  export default Game;
+  export default withStyles(styles)(Game);
