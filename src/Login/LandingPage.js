@@ -19,7 +19,11 @@ const styles = theme => ({
       paddingTop:0,
       paddingLeft:50,
       paddingRight:50,
-      width: '100%'
+      margin:0,
+      width: '100%',
+      [theme.breakpoints.down('sm')]: {
+        padding:0
+      },
   },
   figure: {
       width:'40vW'

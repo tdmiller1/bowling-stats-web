@@ -4,6 +4,7 @@ import axios from 'axios'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -14,9 +15,26 @@ const styles = theme => ({
       marginTop: theme.spacing.unit * 3,
       overflowX: 'auto',
     },
+    profileCard: {
+      textAlign:"center", 
+      width:'50%',
+      marginLeft:'25%',
+      [theme.breakpoints.down('sm')]: {
+        width:'80%',
+        marginLeft:'10%',
+      },
+    },
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
+    },
+    text: {
+      [theme.breakpoints.down('sm')]: {
+        fontSize:25
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize:45
+      },
     },
     dense: {
       marginTop: 16,
@@ -60,17 +78,16 @@ class Profile extends Component {
   
   render() {
       const {classes} = this.props
-      const container = {textAlign:"center", width:'50%',marginLeft:'25%'}
     return (
-      <div style={container}>
+      <div className={classes.profileCard}>
        <Paper className={classes.root} elevation={1}>
-        <Typography variant="h2" component="h3">
+        <Typography className={classes.text} variant="h2" component="h3">
           {this.state.user.playerName !=="" && (this.state.user.playerName)}
         </Typography>
-        <Typography variant="h4" component="h3">
+        <Typography className={classes.text} variant="h4" component="h3">
           {this.state.user.max !== -1 && ("Max Game Score: " + this.state.user.max)}
         </Typography>
-        <Typography variant="h4" component="h3">
+        <Typography className={classes.text} variant="h4" component="h3">
           {this.state.user.average !== -1 && ("Average Game Score: " + this.state.user.average)}
         </Typography>
       </Paper>

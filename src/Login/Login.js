@@ -60,7 +60,7 @@ class Login extends Component {
     return (
       <div>
         {
-          isAuthenticated() && this.state.width > 200  &&
+          isAuthenticated() &&
           <div>
             <div className="header" >
               <AppBar position='static'>
@@ -91,19 +91,12 @@ class Login extends Component {
         </div>
         }
         {
-          !isAuthenticated() && this.state.width > 200 && (
+          !isAuthenticated() && (
             <div>
               <LandingPage callback={this.login} />
             </div>
           )
         }
-        
-        {this.state.width <= 200 && (
-          <div>
-            <h1>Please use larger browser</h1>
-            <p>Or download the app</p>
-          </div>
-        )}
       </div>
       );
     }
