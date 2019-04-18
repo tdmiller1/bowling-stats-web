@@ -9,6 +9,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import IconButton from '@material-ui/core/IconButton';
 import LandingPage from './LandingPage';
 import { Hidden } from '@material-ui/core';
@@ -44,13 +45,21 @@ class Login extends Component {
   }
   
   handleProfile = () => {
-    this.setState({profile: !this.state.profile})
+    this.setState({profile: !this.state.profile, left: false})
   }
   
   toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open,
-    });
+    if(this.state.profile){
+      this.setState({
+        profile: false,
+        left: open
+      });
+    }else{
+      this.setState({
+        left: open
+      });
+    }
+     
   };
 
   render() {
@@ -66,18 +75,24 @@ class Login extends Component {
               <AppBar position='static'>
               <Toolbar>
                 <Hidden only={["md","lg","xl"]}>
+                
                   <IconButton color='inherit' onClick={this.toggleDrawer('left', true)}>
                     <AddCircleIcon></AddCircleIcon>
                   </IconButton>
+                  
                 </Hidden>
                 <Typography variant="h6" color="inherit" className={classes.grow}>
                   Bowling Stats
                 </Typography>
-
+              { !this.state.profile ? (
                 <IconButton title="Profile" color="inherit" style={cursor} className="auth-button" onClick={this.handleProfile}>
                   <AccountBoxIcon></AccountBoxIcon>
-                </IconButton>
-
+                </IconButton> ) : (
+                  <IconButton color='inherit' onClick={() => {this.toggleDrawer('left', false); this.handleProfile()}}>
+                    <DashboardIcon></DashboardIcon>
+                  </IconButton>
+                )
+                }
                 <IconButton title="Logout" color="inherit" style={cursor} className="auth-button" onClick={this.logout} >
                   <ExitToAppIcon></ExitToAppIcon>
                 </IconButton>

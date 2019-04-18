@@ -62,7 +62,7 @@ export default class Auth {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('profile');
     localStorage.removeItem('email');
-    history.replace('/home');
+    history.replace('/');
   }
 
   isAuthenticated = () => {
