@@ -12,16 +12,20 @@ import {
 
 
   const styles = theme => ({
-    cellText:{
-      fontSize:15,
-      [theme.breakpoints.up('md')]: {
-        fontSize:20
+      cellText:{
+        fontSize:14,
+        [theme.breakpoints.up('md')]: {
+          fontSize:15
+      },
+      icon:{
+        margin:'0px',
+        padding:'0px',
+        cursor:'pointer'
+      }
     },
-    }
   });
 
 class Game extends Component {
-
 
   state = {
     host:""
@@ -55,10 +59,9 @@ class Game extends Component {
   }
   render() {
     const {classes} = this.props
-    const cursor = {cursor:"pointer",margin:"10px"}
     return (
-      <TableRow key={this.props._id}>
-        <TableCell align="center">
+      <TableRow className={classes.tableRow} key={this.props._id}>
+        <TableCell className={classes.tableCell} align="center">
           <Typography className={classes.cellText} variant="h6" gutterBottom>
             {this.props.score}
           </Typography>
@@ -69,8 +72,8 @@ class Game extends Component {
           </Typography>
         </TableCell>
         <TableCell align="center">
-          <IconButton title="Delete" color="secondary" align="center" style={cursor} onClick={() => this.delete()}>
-              <DeleteIcon></DeleteIcon>
+          <IconButton className={classes.icon} title="Delete" color="secondary" align="center" onClick={() => this.delete()}>
+              <DeleteIcon className={classes.icon}></DeleteIcon>
           </IconButton>
           </TableCell>
       </TableRow>

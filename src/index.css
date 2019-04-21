@@ -65,7 +65,7 @@ table{
   border: 0px;
   border-collapse: collapse; border-spacing: 0; /* cellspacing */
 }
-td{padding:5px;}
+/* td{padding:5px;} */
 tr:nth-child(even) {background: rgb(224, 224, 224)}
 /* 
 .app-table{

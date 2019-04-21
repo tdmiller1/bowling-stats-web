@@ -5,16 +5,19 @@ import { withStyles } from '@material-ui/core/styles';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
+import AddGame from './Dashboard/AddGame'
 import {Chart} from 'primereact/chart'
 import moment from 'moment';
-import Table from '@material-ui/core/Table';
-import {Drawer, Hidden} from '@material-ui/core'
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {Drawer, 
+  Hidden, 
+  Grid, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableRow, 
+  Button, 
+  TextField, 
+  Table} from '@material-ui/core'
 
 const styles = theme => ({
   container: {
@@ -25,12 +28,23 @@ const styles = theme => ({
     width:'45wv',
     padding:'10px calc(25% - 70px)',
     [theme.breakpoints.down('sm')]: {
-      width:'100%',
-      padding:0,
+      width:'85vw',
+      padding:'10px 5%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width:'45vw',
+      padding:'10px calc(25% - 70px)',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width:'45vw',
+      maxWidth:'850px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxWidth:'850px',
     },
   },
   sidepanel: {
-
+    borderRight:0
   },
   root: {
     width: '100%',
@@ -38,14 +52,59 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   headerText:{
-    fontSize:15,
+    fontSize:14,
     [theme.breakpoints.up('md')]: {
-      fontSize:20
-    }
+      fontSize:15
+    },
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+  },
+  chart2: {
+    minHeight:'calc(50vh - 68px)',
+    [theme.breakpoints.up('xs')]: {
+      minHeight:'calc(40vh - 68px)',
+      maxHeight:'calc(40vh - 68px)'
+    },
+    [theme.breakpoints.up('sm')]: {
+      minHeight:'calc(50vh - 68px)',
+      maxHeight:'calc(50vh - 68px)'
+    },
+    [theme.breakpoints.up('md')]: {
+      minHeight:'calc(37vh - 68px)',
+      maxHeight:'calc(37vh - 68px)'
+    },
+    [theme.breakpoints.up('lg')]: {
+      minHeight:'calc(52vh - 68px)',
+      maxHeight:'calc(52vh - 68px)'
+    },
+    
+  },
+  table2: {
+    minHeight:'50vh',
+    overflowY:'auto',
+    [theme.breakpoints.up('xs')]: {
+      minHeight:'60vh',
+      maxHeight:'60vh'
+    },
+    [theme.breakpoints.up('sm')]: {
+      minHeight:'50vh',
+      maxHeight:'50vh'
+    },
+    [theme.breakpoints.up('md')]: {
+      minHeight:'63vh',
+      maxHeight:'63vh'
+    },
+    [theme.breakpoints.up('lg')]: {
+      minHeight:'48vh',
+      maxHeight:'48vh'
+    },
+  },
+  container: {
+    margin:0,
+    padding:0,
+    width:'100%'
   },
   content:{
     padding:'0px',
@@ -64,25 +123,6 @@ const styles = theme => ({
   menu: {
     width: 200,
   },
-  table: {
-    overflowY:'auto',
-    [theme.breakpoints.up('xs')]: {
-      overflowY:'auto',
-      height: 'calc(100% - 575px)',
-    },
-    [theme.breakpoints.down('md')]: {
-      overflowY:'auto',
-      height: 'calc(100% - 475px)',
-    },
-    [theme.breakpoints.down('xl')]: {
-      overflowY:'auto',
-      height: 'calc(100% - 460px)',
-    },
-    [theme.breakpoints.down('sm')]: {
-      overflowY:'auto',
-      height: 'calc(100% - 275px)',
-    }
-  }
 });
 
 class App extends Component {
@@ -166,7 +206,7 @@ class App extends Component {
     var blabels = []
     var bdata = []
 
-    if(this.state.games === null){
+    if(this.state.games === null || this.state.games.length === 0){
       return
     }
     else{
@@ -311,27 +351,36 @@ class App extends Component {
           </Hidden>
         
         <div className={classes.content}>
-        { games != null ?
-          <div className="app-chart"> 
-            <Chart className={classes.chart} type="line" data={this.state.data} />
-          </div>
-           : <div></div>}
-          { games != null ? 
-          <div className={classes.table}>
-          <Table>
-              <TableHead>
-                  <TableRow>
-                    <TableCell className={classes.headerText} align="center">Score</TableCell>
-                    <TableCell className={classes.headerText} align="center">Date</TableCell>
-                    <TableCell align="center"></TableCell>
-                  </TableRow>
-              </TableHead>
-              <TableBody>
-              {games.map(this.renderGames)}
-            </TableBody>
-          </Table>
-          </div>
-          : <div>To see stats add bowling scores</div> }
+        {
+          (()=> {
+            if(games != null){
+              if(games.length === 0){
+                return <AddGame />
+              }else{
+                return (
+                  <Grid container spacing={24} className={classes.container}>
+                    <Grid container className={classes.chart2} direction='row' >
+                      <Chart className={classes.chart} type="line" data={this.state.data} />
+                    </Grid>
+                    <Grid alignItems="stretch" justify="center" className={classes.table2} direction='row' container >
+                      <Table>
+                        <TableHead>
+                            <TableRow>
+                              <TableCell className={classes.headerText} align="center">Score</TableCell>
+                              <TableCell className={classes.headerText} align="center">Date</TableCell>
+                              <TableCell align="center"></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {games.map(this.renderGames)}
+                      </TableBody>
+                    </Table>
+                    </Grid>
+                </Grid>)
+              }
+            }
+          })()
+        }
         </div>
       </div>
       );
