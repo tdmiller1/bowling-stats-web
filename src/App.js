@@ -300,6 +300,12 @@ class App extends Component {
                     required
                     selectedDays={this.state.selectedDay}
                     onDayClick={this.handleDayClick}
+                    disabledDays={[
+                      {
+                        after: new Date(),
+                        before: new Date(2100, 3, 25),
+                      },
+                    ]}
                   />
                 </div>
 
@@ -337,6 +343,12 @@ class App extends Component {
                     required
                     selectedDays={this.state.selectedDay}
                     onDayClick={this.handleDayClick}
+                    disabledDays={[
+                      {
+                        after: new Date(),
+                        before: new Date(2100, 3, 25),
+                      },
+                    ]}
                   />
                 </div>
 
