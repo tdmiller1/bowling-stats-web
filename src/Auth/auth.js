@@ -4,7 +4,6 @@ import history from './history';
 
 export default class Auth {
 
-
   auth0 = new auth0.WebAuth({
     domain: 'tuckermillerdev.auth0.com',
     clientID: 'Otg8g3tLLbeDgj8KsXhyyuzQgYR006Bq',
@@ -13,8 +12,7 @@ export default class Auth {
     scope: 'openid profile email'
   });
 
-  login = (friendAdd = false) => {
-    localStorage.setItem('friend', friendAdd)
+  login = () => {
     this.auth0.authorize();
   }
 
@@ -45,21 +43,14 @@ export default class Auth {
           } else {
               url = `https://bowling-stats-server.herokuapp.com/users/add?id=${profile.email}&name=${profile.name}`;
           }
-          if(localStorage.getItem('friend')){
-            console.log(typeof localStorage.getItem('friend'))
-            console.log(localStorage.getItem('friend'))
-            let friend = localStorage.getItem('friend')
-              window.location = '/friends?friend=' + friend
-          }else{
-            fetch(url).then(response => {
-              history.push({
-                pathname: '/home',
-              state: {
-                email: profile.email
-              }
-            })
-            })
-          }
+          fetch(url).then(response => {
+            history.push({
+            pathname: '/home',
+            state: {
+              email: profile.email
+            }
+          })
+          })
         }
       }
     })

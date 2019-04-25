@@ -163,7 +163,7 @@ class LandingPage extends Component {
           
         <Grid container spacing={24} className={classes.container}>
 
-            <Grid className={classes.header} item xs={12}>
+            <Grid className={classes.header} direction='row' item xs={12}>
                 <img className={classes.logo} src={Logo} alt='logo' />
                 <Typography className={classes.logoText} variant='h5'>Bowling Stats</Typography>
                 <Button
@@ -187,7 +187,7 @@ class LandingPage extends Component {
                 container>
                 <div>
                     <Typography className={classes.figureOneTitle} variant='h3'>Track and Save Bowling Games</Typography>
-                    <Typography variant='subtitle1'>
+                    <Typography variant='p'>
                         See real-time updates and tracking analytics for all of your recent and past games.
                         Table view and Graph view provided below.
                         <Hidden only={["sm","xs"]}>
@@ -202,11 +202,11 @@ class LandingPage extends Component {
                 </Grid>
             </Hidden>
 
-            <Grid container justify="center">
+            <Grid container direction='row' justify="center" xs={24}>
                 <Chart className={classes.chart} type="line" data={data} />
             </Grid>
 
-            <Grid container justify='center' xs={12}>
+            <Grid container direction='row' justify='center' xs={24}>
                 <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
@@ -277,10 +277,10 @@ class LandingPage extends Component {
 
         </Grid>
         
-        <Grid className={classes.divider} item xs={12}>
+        <Grid className={classes.divider} xs={24}>
             <Divider />
         </Grid> 
-        <Grid container className={classes.footer} sm={12} xs={12}>
+        <Grid container alignContent='baseline' className={classes.footer}sm={24} xs={12}>
                 <Grid container item xs={3} direction='column' alignItems='center'>
                     <img className={classes.footerLogo} src={Logo} alt='logo' />
                 </Grid>
@@ -292,6 +292,7 @@ class LandingPage extends Component {
                 </Grid>
                 
                 <Grid container direction='column' justify='space-evenly' xs={4} sm={3}>
+                    <Typography variant='p'></Typography>
                     <Grid alignItems='center' container direction='column'>
                         <IconButton href="https://www.linkedin.com/in/tuckermiller7/" target="#" style={{backgroundColor:'transparent'}} className={classes.link}>
                             <SvgIcon className={classes.icon}><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></SvgIcon>

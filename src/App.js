@@ -23,9 +23,6 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    margin:0,
-    padding:0,
-    width:'100%'
   },
   chart: {
     width:'45wv',
@@ -103,6 +100,11 @@ const styles = theme => ({
       minHeight:'48vh',
       maxHeight:'48vh'
     },
+  },
+  container: {
+    margin:0,
+    padding:0,
+    width:'100%'
   },
   content:{
     padding:'0px',
