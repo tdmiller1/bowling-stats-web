@@ -76,15 +76,6 @@ class Login extends Component {
     this.setState({shareLink: !this.state.shareLink})
   }
 
-  handleTwitter(){
-    alert("This is your friend referral link: " + this.state.host+"friends?friend="+this.state.email)
-    var link = "This is your friend referral link: " + this.state.host+"friends?friend="+this.state.email;
-    link.select();
-    document.execCommand("copy");
-
-
-  }
-
   componentWillMount(){
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         this.setState({host: "http://localhost:4000"})

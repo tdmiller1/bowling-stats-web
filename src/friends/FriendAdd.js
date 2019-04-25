@@ -14,11 +14,21 @@ class FriendAdd extends Component {
 
     state = {
         email: localStorage.getItem('email') !== null ? localStorage.getItem('email').slice(1,localStorage.getItem('email').length-1) : null,
-        friendId: null
+        friendId: null,
+        host:null
     }
 
+    
+  componentWillMount(){
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        this.setState({host: "http://localhost:3001"})
+    } else {
+        this.setState({host: "https://bowling-stats-server.herokuapp.com"})
+    }
+  }
+
     addFriend(){
-        const putUrl = `http://localhost:3001/users/add/friends?id=${this.state.email}&friend=${this.state.friendId}`;
+        const putUrl = `${this.state.host}/users/add/friends?id=${this.state.email}&friend=${this.state.friendId}`;
         axios.put(putUrl)
         window.location = '/'
     }
