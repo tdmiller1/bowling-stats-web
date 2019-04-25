@@ -87,9 +87,9 @@ class Login extends Component {
 
   componentWillMount(){
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        this.setState({host: "http://localhost:3001"})
+        this.setState({host: "http://localhost:4000"})
     } else {
-        this.setState({host: "https://bowling-stats-server.herokuapp.com"})
+        this.setState({host: "https://bowling-stats-web.herokuapp.com"})
     }
   }
 
