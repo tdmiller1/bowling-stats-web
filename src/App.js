@@ -20,10 +20,6 @@ import {Drawer,
   Table} from '@material-ui/core'
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   chart: {
     width:'45wv',
     padding:'10px calc(25% - 70px)',
@@ -225,9 +221,27 @@ class App extends Component {
         bdata.push(averageList[j])
       }
 
-      this.setState({averages: averageList, data: {labels: alabels, datasets: [ 
-        {label: "Games", data: adata, fill: false, backgroundColor: "#42A5F5", borderColor: '#42A5F5'},
-        {label: "Average", data: bdata, fill: false, backgroundColor: "#66BB6A", borderColor: '#66BB6A'}
+      var mostRecentGameSorted = this.state.games.reverse();
+
+      this.setState({
+        games: mostRecentGameSorted,
+        averages: averageList,
+        data: {
+          labels: alabels,
+          datasets: [
+            {
+              label: "Games",
+              data: adata,
+              fill: false,
+              backgroundColor: "#42A5F5",
+              borderColor: '#42A5F5'
+            },{
+              label: "Average",
+              data: bdata,
+              fill: false,
+              backgroundColor: "#66BB6A",
+              borderColor: '#66BB6A'
+            }
       ]}})
     }
   }

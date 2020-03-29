@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import arrow from '../assets/arrow.png'
-import ArrowBack from "@material-ui/icons/ArrowBack";
 import { withStyles } from '@material-ui/core/styles';
 import { Hidden, Typography } from '@material-ui/core';
 
@@ -28,7 +27,7 @@ class AddGame extends Component {
                 </Typography>
             </Hidden>
             <Hidden only={['md','lg','xl']}>
-                <img src={arrow} className={classes.arrow}/>
+                <img alt="Click this button" src={arrow} className={classes.arrow}/>
                 <Typography variant='h4'>
                     Press the '+' to add a game
                 </Typography>
